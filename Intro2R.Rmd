@@ -1,0 +1,24 @@
+---
+title: "Intro2R"
+author: "Melina Vargas"
+date: "2023-02-16"
+output: html_document
+---
+
+```{r tidy, echo=TRUE}
+library(tidyverse); library(ggplot2)
+data("diamonds")
+
+df=diamonds %>% ggplot(aes(x=depth, y=price, color=cut))+
+  geom_point(size=0.2)+facet_wrap(cut~.)
+df
+```
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
