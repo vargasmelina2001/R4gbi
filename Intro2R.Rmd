@@ -13,7 +13,7 @@ df=diamonds %>% ggplot(aes(x=depth, y=price, color=cut))+
   geom_point(size=0.2)+geom_jitter()+ facet_wrap(cut~.)
 df
 df2=diamonds %>% ggplot(aes(x=cut, y=price, color=cut))+
-  geom_boxplot()+geom_jitter(size=0.1, alpha=0.8)+facet_wrap()
+  geom_boxplot()+geom_jitter(size=0.1, alpha=0.8)
 df2
 ```
 
