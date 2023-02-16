@@ -6,15 +6,48 @@ output: html_document
 ---
 
 ```{r tidy, echo=TRUE}
-library(tidyverse); library(ggplot2)
+library(tidyverse); library(ggplot2);library(ggpubr)
 data("diamonds")
 
 df=diamonds %>% ggplot(aes(x=depth, y=price, color=cut))+
-  geom_point(size=0.2)+geom_jitter()+ facet_wrap(cut~.)
+  geom_point(size=0.2)+ facet_wrap(cut~.)
 df
-df2=diamonds %>% ggplot(aes(x=cut, y=price, color=cut))+
-  geom_boxplot()+geom_jitter(size=0.1, alpha=0.8)
+
+df2 = diamonds %>% filter(price <= 10000)  %>% 
+  ggplot(aes(x=cut, y=price, color=clarity )) + 
+  geom_boxplot() + geom_jitter(size=0.1, alpha=0.2) +
+  facet_wrap(clarity ~.)
 df2
+
+ggsave(df2, file = "diamonds.png", units = "in", width = 10, 
+       height =10, dpi=300)
+```
+##Tarea
+Utilizando la data *who* que se puede cargar con data("who"). Esta tabla recoge datos sobre casos reportados de tuberculosis en el mundo. Construya un código para que se vea la siguiente figura. Que contiene:
+
+Datos de niñas y niños entre 0 y 14 años.
+
+Datos del año 1996 en adelante (1996 - 2012).
+
+Geometría de nube de puntos.
+
+Geometría de regresión lineal.
+
+Ecuación de la regresión de la regresión y el coeficiente de determinación $$R^2adj$$.
+
+Coloración por años.
+
+Requiere usar las librerías ggplot2, ggpubr, ggpmisc, dplyr, tidyverse
+```{r tarea, echo=TRUE}
+library(tidyverse); library(ggplot2);library(ggpubr);library(ggpmisc);library(dplyr)
+data("who")
+formula= y ~ x
+df3 = who %>% filter(year >=1996, year<=2012) %>%
+  ggplot(aes(x=new_sp_m014, na.rm = TRUE, y=new_sp_f014, color=year )) + 
+  geom_point(size=0.5)+geom_jitter(size=0.5, alpha=0.5) + stat_poly_line(formula=formula, size=0.5) +
+  stat_poly_eq(use_label(c("eq", "adj.R2")), formula = formula, size=2)+
+  facet_wrap(year ~.)
+df3
 ```
 
 
