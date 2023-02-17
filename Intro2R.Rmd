@@ -44,8 +44,10 @@ data("who")
 formula= y ~ x
 df3 = who %>% filter(year >=1996, year<=2012) %>%
   ggplot(aes(x=new_sp_f014, na.rm = TRUE, y=new_sp_m014, color=factor(year))) + 
-  geom_point(size=0.5)+geom_jitter(size=0.5, alpha=1) + stat_poly_line(formula=formula,size=0.5) + stat_poly_eq(use_label(c("eq", "adj.R2")),orientation = "y", label.y = 1000, formula = formula, size=1.25)+ theme_classic()+ theme(legend.position="none")+labs(x="Casos positivos de TB en niños de 0 a 14 años", y="Casos positivos de TB en niños de 0 a 14 años")+scale_x_continuous(trans ='log10') +scale_y_continuous(trans = 'log10')+coord_cartesian(expand =FALSE) +facet_wrap(~year)
+  geom_point(size=0.4)+ geom_jitter(size=0.5, alpha=1) + stat_poly_line(formula=formula, size=0.5) + stat_poly_eq(use_label(c("eq", "adj.R2")), coef.digits = 2, orientation = "y", label.y = 1000, formula=formula, size=1.8)+ theme_classic()+ theme(legend.position="none")+ labs(x="Casos positivos de TB en niños de 0 a 14 años", y="Casos positivos de TB en niños de 0 a 14 años")+ scale_x_continuous(trans ='log10') +scale_y_continuous(trans = 'log10')+ coord_cartesian(expand =FALSE)+facet_wrap(~year)
 df3
+ggsave(df3, file = "who.png", units = "in", width = 10, 
+       height =10, dpi=300)
 ```
 
 
