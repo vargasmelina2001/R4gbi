@@ -41,6 +41,10 @@ Requiere usar las librerías ggplot2, ggpubr, ggpmisc, dplyr, tidyverse
 ```{r tarea, echo=TRUE, warning=FALSE, fig.height=14, fig.width=10}
 library(tidyverse); library(ggplot2);library(ggpubr);library(ggpmisc);library(dplyr)
 #data("who")
+```
+
+
+```{r tarea, echo=TRUE, warning=FALSE, fig.height=14, fig.width=10}
 formula <- y~x
 df3 = who %>% filter(year >=1996, year<=2012) %>%
   ggplot(aes(x=new_sp_f014, na.rm = TRUE, y=new_sp_m014, color=factor(year))) + 
@@ -62,4 +66,7 @@ ggsave(df3, file = "who.png", units = "in", width = 10,
 
 ```
 
+```{r}
+
+```
 
